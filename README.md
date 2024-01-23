@@ -1,3 +1,5 @@
+Christine El-Khoury - Diatery patterns
+
 TODO: Add more to the title of your project here
 
 # LearningR:
