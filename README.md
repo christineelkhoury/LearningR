@@ -1,4 +1,4 @@
-Christine El-Khoury - Diatery patterns
+Christine El-Khoury - Dietary patterns
 
 TODO: Add more to the title of your project here
 
