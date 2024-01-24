@@ -1,6 +1,8 @@
 Christine El-Khoury - Dietary patterns
 Test
 
+Test day 2
+
 TODO: Add more to the title of your project here
 
 # LearningR:
