@@ -33,6 +33,37 @@ NHANES_small %>%
 
 # Prettier table
 
+- CEK
+- DIfE
+
+# Intro
+
+
+
+
+**Test** *quarto*
+
+
+# Methods
+
+
+
+
+**Test** *quarto*
+
+
+## Analysis
+
+
+
+# Results
+
+
+**Test** *quarto*
+
+
+
+
 ```{r}
 #| echo: false
 
@@ -46,17 +77,19 @@ NHANES_small %>%
   ungroup() %>%
   mutate(
     # Task 2a.
-   mean_age = round(mean_age, 1),
+    mean_age = round(mean_age, 1),
     mean_bmi = round(mean_bmi, 1),
     # Task 2b.
     education = str_to_sentence(education)
-  ) %>% 
-  rename("Diabetes Status"=diabetes,
-      "Education"=education,
-      "Mean Age"= mean_age,
-      "Mean BMI"= mean_bmi) %>% 
+  ) %>%
+  rename(
+    "Diabetes Status" = diabetes,
+    "Education" = education,
+    "Mean Age" = mean_age,
+    "Mean BMI" = mean_bmi
+  ) %>%
   knitr::kable(caption = "Mean values of Age and BMI for each education and diabetes status.")
-
-
 ```
-
+```{r}
+2 + 2
+```
