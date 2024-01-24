@@ -2,7 +2,7 @@ Christine El-Khoury - Dietary patterns
 Test
 
 Test day 2
-Test daz 2 part 2
+Test day 2 part 2
 
 TODO: Add more to the title of your project here
 
