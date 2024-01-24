@@ -30,3 +30,33 @@ NHANES_small %>%
   ungroup() %>%
   knitr::kable(caption = "Mean values of Age and BMI for each education and diabetes status")
 ```
+
+# Prettier table
+
+```{r}
+#| echo: false
+
+NHANES_small %>%
+  filter(!is.na(diabetes), !is.na(education)) %>%
+  group_by(diabetes, education) %>%
+  summarise(
+    mean_age = mean(age, na.rm = TRUE),
+    mean_bmi = mean(bmi, na.rm = TRUE)
+  ) %>%
+  ungroup() %>%
+  mutate(
+    # Task 2a.
+   mean_age = round(mean_age, 1),
+    mean_bmi = round(mean_bmi, 1),
+    # Task 2b.
+    education = str_to_sentence(education)
+  ) %>% 
+  rename("Diabetes Status"=diabetes,
+      "Education"=education,
+      "Mean Age"= mean_age,
+      "Mean BMI"= mean_bmi) %>% 
+  knitr::kable(caption = "Mean values of Age and BMI for each education and diabetes status.")
+
+
+```
+
