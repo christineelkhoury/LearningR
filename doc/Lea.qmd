@@ -1,0 +1,32 @@
+---
+title: "Reproducible doc"
+author: "CEK"
+format: html
+
+---
+
+
+
+```{r setup}
+library(tidyverse)
+library(NHANES)
+NHANES_small <- read_csv(here::here("data/NHANES_small.csv"))
+```
+
+
+```{r}
+NHANES_small <- select(NHANES_small, age, sex, bmi, diabetes, phys_active, bp_sys_ave, bp_dia_ave, education)
+
+NHANES_small
+```
+```{r}
+NHANES_small %>%
+  filter(!is.na(diabetes)) %>%
+  group_by(diabetes, education) %>%
+  summarise(
+    mean_age = mean(age, na.rm = TRUE),
+    mean_bmi = mean(bmi, na.rm = TRUE)
+  ) %>%
+  ungroup() %>%
+  knitr::kable(caption = "Mean values of Age and BMI for each education and diabetes status")
+```
