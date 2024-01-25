@@ -193,37 +193,39 @@ nhanes_exercise %>%
 ```
 ###Visualizing 3 or more variables
 ```{r}
-NHANES_small %>% 
-    filter(!is.na(diabetes),!is.na(education)) %>%
-    ggplot(aes(x= education,
-               y= bp_sys_ave,
-           colour = diabetes))+
-    geom_boxplot(na.rm = TRUE)
-```
-
-```{r}
-NHANES_small %>% 
-    ggplot(aes(x= bmi, y= bp_sys_ave, colour=age))+
-    geom_point(na.rm=TRUE)
+NHANES_small %>%
+  filter(!is.na(diabetes), !is.na(education)) %>%
+  ggplot(aes(
+    x = education,
+    y = bp_sys_ave,
+    colour = diabetes
+  )) +
+  geom_boxplot(na.rm = TRUE)
 ```
 
 ```{r}
 NHANES_small %>%
-  filter(!is.na(diabetes)) %>% 
+  ggplot(aes(x = bmi, y = bp_sys_ave, colour = age)) +
+  geom_point(na.rm = TRUE)
+```
+
+```{r}
+NHANES_small %>%
+  filter(!is.na(diabetes)) %>%
   ggplot(aes(x = bmi, y = bp_sys_ave, colour = diabetes)) +
   geom_point(na.rm = TRUE)
 ```
 
 ```{r}
 NHANES_small %>%
-  filter(!is.na(diabetes)) %>% 
+  filter(!is.na(diabetes)) %>%
   ggplot(aes(x = bmi, y = bp_sys_ave)) +
   geom_point(na.rm = TRUE) +
-facet_grid(rows=vars(diabetes)) #cols or rows
+  facet_grid(rows = vars(diabetes)) # cols or rows
 ```
 ```{r}
 NHANES_small %>%
-  filter(!is.na(diabetes), !is.na(education)) %>% 
+  filter(!is.na(diabetes), !is.na(education)) %>%
   ggplot(aes(x = bmi, y = bp_sys_ave, colour = age)) +
   geom_point(na.rm = TRUE) +
   facet_grid(
@@ -231,4 +233,3 @@ NHANES_small %>%
     cols = vars(education)
   )
 ```
-
