@@ -146,3 +146,89 @@ NHANES_small %>%
   ggplot(aes(x = diabetes, y = bmi)) +
   geom_violin(na.rm = TRUE)
 ```
+### Exercise to make plots with one or two variables
+```{r}
+library(NHANES)
+nhanes_exercise <- NHANES %>%
+  rename_with(snakecase::to_snake_case) %>%
+  rename(sex = gender)
+```
+```{r}
+#| label: fig-age-diabetes
+#| fig-cap: "Participant’s age at collection and age of diabetes diagnosis"
+#| fig-subcap:
+#| - "Age at collection - distribution"
+#| - "Age of diabetes diagnosis"
+#| layout-ncol: 2
+
+# Distribution of age
+nhanes_exercise %>%
+  ggplot(aes(x = age)) +
+  geom_density(na.rm = TRUE)
+
+# Distribution of age at diabetes diagnosis
+nhanes_exercise %>%
+  ggplot(aes(x = diabetes_age)) +
+  geom_density(na.rm = TRUE)
+```
+
+```{r}
+#| label: fig-age-smoke
+#| fig-cap: "PArticipants who currently smoke and who are at or above the age or 20."
+
+# Number of people who smoke now and are or above 20 years of age,
+# removing those with missing smoking status.
+nhanes_exercise %>%
+  filter(age >= 20, !is.na(smoke_now)) %>%
+  ggplot(aes(x = smoke_now)) +
+  geom_bar()
+```
+```{r}
+# BMI in relation to mean arterial pressure
+nhanes_exercise %>%
+  mutate(mean_arterial_pressure = (bp_sys_ave + (2 * bp_dia_ave)) / 3) %>%
+  ggplot(aes(x = bmi, y = mean_arterial_pressure)) +
+  geom_hex(na.rm = TRUE) +
+  geom_smooth()
+```
+###Visualizing 3 or more variables
+```{r}
+NHANES_small %>% 
+    filter(!is.na(diabetes),!is.na(education)) %>%
+    ggplot(aes(x= education,
+               y= bp_sys_ave,
+           colour = diabetes))+
+    geom_boxplot(na.rm = TRUE)
+```
+
+```{r}
+NHANES_small %>% 
+    ggplot(aes(x= bmi, y= bp_sys_ave, colour=age))+
+    geom_point(na.rm=TRUE)
+```
+
+```{r}
+NHANES_small %>%
+  filter(!is.na(diabetes)) %>% 
+  ggplot(aes(x = bmi, y = bp_sys_ave, colour = diabetes)) +
+  geom_point(na.rm = TRUE)
+```
+
+```{r}
+NHANES_small %>%
+  filter(!is.na(diabetes)) %>% 
+  ggplot(aes(x = bmi, y = bp_sys_ave)) +
+  geom_point(na.rm = TRUE) +
+facet_grid(rows=vars(diabetes)) #cols or rows
+```
+```{r}
+NHANES_small %>%
+  filter(!is.na(diabetes), !is.na(education)) %>% 
+  ggplot(aes(x = bmi, y = bp_sys_ave, colour = age)) +
+  geom_point(na.rm = TRUE) +
+  facet_grid(
+    rows = vars(diabetes),
+    cols = vars(education)
+  )
+```
+
