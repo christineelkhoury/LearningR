@@ -4,7 +4,7 @@ author: "CEK"
 format: html
 
 ---
-
+![Beach image from Google](images/beach.jfif)
 
 
 ```{r setup}
@@ -92,4 +92,57 @@ NHANES_small %>%
 ```
 ```{r}
 2 + 2
+```
+
+
+###One variable plot
+```{r}
+#| fig-cap: "Distribution of BMI"
+#| label: fig-bmi-histo
+#| message: false
+
+NHANES_small %>%
+  filter(bmi <= 60) %>%
+  ggplot(aes(x = bmi)) +
+  geom_histogram(na.rm = TRUE)
+```
+```{r}
+#| label: fig-diabetes-education
+#| fig-cap: "Count of diabetes and education"
+#| fig-subcap:
+#| - "Number of those with diferent education"
+#| - "Number of those with or without diabetes"
+#| layout-ncol: 2
+
+
+NHANES_small %>%
+  filter(!is.na(education)) %>%
+  ggplot(aes(x = education)) +
+  geom_bar()
+
+NHANES_small %>%
+  filter(!is.na(diabetes)) %>%
+  ggplot(aes(x = diabetes)) +
+  geom_bar()
+```
+###Plotting two variables
+```{r}
+NHANES_small %>%
+  ggplot(aes(x = bmi, y = bp_sys_ave)) +
+  geom_hex(na.rm = TRUE) +
+  geom_smooth(na.rm = TRUE)
+```
+###Plotting two discrete variables
+```{r}
+NHANES_small %>%
+  filter(!is.na(education), !is.na(diabetes)) %>%
+  ggplot(aes(x = diabetes, fill = education)) +
+  geom_bar(position = position_dodge())
+```
+###Ploting discrete and continuous variables
+```{r}
+NHANES_small %>%
+  filter(!is.na(diabetes), bmi <= 60) %>%
+  ggplot(aes(x = diabetes, y = bmi)) +
+  geom_violin(na.rm = TRUE)
 ```
